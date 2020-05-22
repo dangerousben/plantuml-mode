@@ -258,7 +258,7 @@
   (unless (or (eq system-type 'cygwin) (file-exists-p plantuml-jar-path))
     (error "Could not find plantuml.jar at %s" plantuml-jar-path))
   (with-current-buffer buf
-    (let ((cmd-args (append (list plantuml-java-command nil t nil)
+    (let ((cmd-args (append (list plantuml-java-command nil '(t nil) nil)
                             (plantuml-jar-render-command "-language"))))
       (apply 'call-process cmd-args)
       (goto-char (point-min)))))
@@ -272,7 +272,7 @@
 (defun plantuml-executable-get-language (buf)
   "Retrieve the language specification from the PlantUML executable and paste it into BUF."
   (with-current-buffer buf
-    (let ((cmd-args (append (list plantuml-executable-path nil t nil) (list "-language"))))
+    (let ((cmd-args (append (list plantuml-executable-path nil '(t nil) nil) (list "-language"))))
       (apply 'call-process cmd-args)
       (goto-char (point-min)))))
 
